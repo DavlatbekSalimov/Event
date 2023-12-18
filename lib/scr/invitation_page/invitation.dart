@@ -1,13 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
+import 'package:event/scr/foodarguments_page.dart/food_arguments.dart';
+import 'package:event/widgets/myBottontwo.dart';
 import 'package:event/widgets/myButton.dart';
 import 'package:event/widgets/mydivider.dart';
 import 'package:event/widgets/mytext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-// ... (imports and other code)
 
 class InvitationPage extends StatefulWidget {
   const InvitationPage({Key? key}) : super(key: key);
@@ -17,7 +14,9 @@ class InvitationPage extends StatefulWidget {
 }
 
 class _InvitationPageState extends State<InvitationPage> {
-  bool border = false;
+  bool borderyes = false;
+  bool borderno = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +30,6 @@ class _InvitationPageState extends State<InvitationPage> {
         padding: const EdgeInsets.all(18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Mydivider(
               white: 0.4,
@@ -39,7 +37,10 @@ class _InvitationPageState extends State<InvitationPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25),
               child: Center(
-                child: SvgPicture.asset('assets/images/invite.svg'),
+                child: SvgPicture.asset(
+                  'assets/images/invite.svg',
+                  height: 140,
+                ),
               ),
             ),
             const Padding(
@@ -49,48 +50,55 @@ class _InvitationPageState extends State<InvitationPage> {
                 size: 20,
               ),
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    //border = !border;
-                    if (border) {
-                      border = false;
-                    } else {
-                      border = true;
-                    }
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1C1C1C),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(
-                          color: border ? Colors.indigoAccent : Colors.black)),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      'Yes',
-                      style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+            MyElevatedButtonTwo(
+              text: 'Yes',
+              border: borderyes,
+              onPressed: () {
+                setState(() {
+                  if (borderyes) {
+                    borderyes = false;
+                    borderno = true;
+                  } else {
+                    borderyes = true;
+                    borderno = false;
+                  }
+                });
+              },
             ),
-            MyElevatedButton(
-              onPressed: () {},
-              textt: 'NEX',
-            )
+            MyElevatedButtonTwo(
+              text: 'No',
+              border: borderno,
+              onPressed: () {
+                setState(() {
+                  if (borderno) {
+                    borderno = false;
+                    borderyes = true;
+                  } else {
+                    borderno = true;
+                    borderyes = false;
+                  }
+                });
+              },
+            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: MyElevatedButton(
+          onPressed: () {
+            if (borderno || borderyes) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (contex) => const FoodArgumentsPage(),
+                ),
+              );
+            } else {}
+          },
+          textt: 'NEXT',
+          color: (borderno || borderyes)
+              ? null
+              : const Color.fromARGB(255, 123, 150, 195),
         ),
       ),
     );

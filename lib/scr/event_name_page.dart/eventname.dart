@@ -58,7 +58,7 @@ class _EventNameState extends State<EventName> {
               ),
               const MyTextField(
                 text: 'Budget',
-                hintText: 'HH:MM',
+                hintText: '00 000',
                 icon: CupertinoIcons.money_rubl,
               ),
             ],
