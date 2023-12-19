@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
-import 'package:event/scr/event_name_page.dart/mytextfild.dart';
+import 'package:event/scr/event_name_page/mytextfild.dart';
 import 'package:event/scr/invitation_page/invitation.dart';
 import 'package:event/widgets/myButton.dart';
 import 'package:event/widgets/mydivider.dart';

@@ -1,6 +1,6 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_literals_to_create_immutables
 
-import 'package:event/scr/occasion_page.dart/occasion.dart';
+import 'package:event/scr/occasion_page/occasion.dart';
 import 'package:event/widgets/myContainer.dart';
 import 'package:event/widgets/mytext.dart';
 import 'package:flutter/material.dart';

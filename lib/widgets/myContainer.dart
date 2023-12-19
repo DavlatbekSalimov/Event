@@ -31,7 +31,7 @@ class _MyContainerState extends State<MyContainer> {
           });
         },
         child: Container(
-          height: widget.height ?? MediaQuery.of(context).size.height * 0.18,
+          height: widget.height ?? MediaQuery.of(context).size.height * 0.20,
           decoration: BoxDecoration(
             border:
                 Border.all(color: border ? Color(0xFFD898FF) : Colors.black),

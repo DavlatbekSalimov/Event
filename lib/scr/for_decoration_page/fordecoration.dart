@@ -1,4 +1,4 @@
-import 'package:event/scr/foodarguments_page/food_arguments.dart';
+import 'package:event/scr/rentgames_page/rentgames.dart';
 import 'package:event/widgets/myBottontwo.dart';
 import 'package:event/widgets/myButton.dart';
 import 'package:event/widgets/mydivider.dart';
@@ -6,16 +6,18 @@ import 'package:event/widgets/mytext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class InvitationPage extends StatefulWidget {
-  const InvitationPage({Key? key}) : super(key: key);
+class DecorationPage extends StatefulWidget {
+  const DecorationPage({Key? key}) : super(key: key);
 
   @override
-  State<InvitationPage> createState() => _InvitationPageState();
+  State<DecorationPage> createState() => _DecorationPageState();
 }
 
-class _InvitationPageState extends State<InvitationPage> {
-  bool borderyes = false;
-  bool borderno = false;
+class _DecorationPageState extends State<DecorationPage> {
+  bool border1 = false;
+  bool border2 = false;
+  bool border3 = false;
+  bool border4 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,13 @@ class _InvitationPageState extends State<InvitationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Mydivider(
-              white: 0.4,
+              white: 0.13,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25),
               child: Center(
                 child: SvgPicture.asset(
-                  'assets/images/invite.svg',
+                  'assets/images/ball.svg',
                   height: 140,
                 ),
               ),
@@ -46,36 +48,57 @@ class _InvitationPageState extends State<InvitationPage> {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: MyText(
-                text: 'Do you want to send e-invite?',
-                size: 20,
+                text: 'Do you wish to hire a decorator?',
+                size: 18,
               ),
             ),
             MyElevatedButtonTwo(
               text: 'Yes',
-              border: borderyes,
+              border: border1,
               onPressed: () {
                 setState(() {
-                  if (borderyes) {
-                    borderyes = false;
-                    borderno = true;
+                  if (border1) {
+                    border1 = true;
+                    border2 = false;
+                    border3 = false;
                   } else {
-                    borderyes = true;
-                    borderno = false;
+                    border1 = true;
+                    border2 = false;
+                    border3 = false;
                   }
                 });
               },
             ),
             MyElevatedButtonTwo(
               text: 'No',
-              border: borderno,
+              border: border2,
               onPressed: () {
                 setState(() {
-                  if (borderno) {
-                    borderno = false;
-                    borderyes = true;
+                  if (border2) {
+                    border1 = false;
+                    border2 = true;
+                    border3 = false;
                   } else {
-                    borderno = true;
-                    borderyes = false;
+                    border1 = false;
+                    border2 = true;
+                    border3 = false;
+                  }
+                });
+              },
+            ),
+            MyElevatedButtonTwo(
+              text: 'I will decorate myself',
+              border: border3,
+              onPressed: () {
+                setState(() {
+                  if (border3) {
+                    border1 = false;
+                    border2 = false;
+                    border4 = false;
+                  } else {
+                    border1 = false;
+                    border2 = false;
+                    border3 = true;
                   }
                 });
               },
@@ -86,17 +109,17 @@ class _InvitationPageState extends State<InvitationPage> {
       bottomNavigationBar: SafeArea(
         child: MyElevatedButton(
           onPressed: () {
-            if (borderno || borderyes) {
+            if (border2 || border1 || border3) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (contex) => const FoodArgumentsPage(),
+                  builder: (contex) => const RentGamesPage(),
                 ),
               );
-            } else {}
+            }
           },
           textt: 'NEXT',
-          color: (borderno || borderyes)
+          color: (border2 || border1 || border3 || border4)
               ? null
               : const Color.fromARGB(255, 123, 150, 195),
         ),

@@ -1,19 +1,20 @@
-import 'package:event/scr/guestlist_page.dart/guestlist.dart';
+import 'package:event/scr/event_name_page/eventname.dart';
 import 'package:event/widgets/myButton.dart';
 import 'package:event/widgets/myContainer.dart';
 import 'package:event/widgets/mydivider.dart';
 import 'package:event/widgets/mytext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 
-class OccasionPage extends StatefulWidget {
-  const OccasionPage({super.key});
+class GuestListPage extends StatefulWidget {
+  const GuestListPage({super.key});
 
   @override
-  State<OccasionPage> createState() => _OccasionPageState();
+  State<GuestListPage> createState() => _GuestListPageState();
 }
 
-class _OccasionPageState extends State<OccasionPage> {
+class _GuestListPageState extends State<GuestListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,34 +30,42 @@ class _OccasionPageState extends State<OccasionPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Mydivider(
-              white: 0.75,
+              white: 0.6,
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: MyText(
-                text: 'What is the occasion?',
+                text: 'What is the size of the guest list?',
                 size: 20,
               ),
             ),
             Expanded(
               child: GridView.builder(
-                itemCount: 5,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                itemCount: 3,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisExtent: MediaQuery.of(context).size.height / 5.8,
                     crossAxisCount: 3),
                 itemBuilder: (BuildContext contex, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(5),
                     child: MyContainer(
+                      height: MediaQuery.of(context).size.height * 0.21,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                          Gap(5),
                           SvgPicture.asset(
                             'assets/images/${imagename.elementAt(index)}.svg',
-                            height: 60,
+                            height: 50,
                           ),
                           MyText(
-                            text: texts.elementAt(index),
-                          )
+                            text: title.elementAt(index),
+                          ),
+                          MyText(
+                            text: subtitle.elementAt(index),
+                            fontWeight: FontWeight.w400,
+                            size: 14,
+                          ),
                         ],
                       ),
                     ),
@@ -65,15 +74,15 @@ class _OccasionPageState extends State<OccasionPage> {
               ),
             ),
             MyElevatedButton(
-              textt: 'NEXT',
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => GuestListPage(),
+                    builder: (context) => EventName(),
                   ),
                 );
               },
+              textt: 'NEXT',
             )
           ],
         ),
@@ -82,5 +91,18 @@ class _OccasionPageState extends State<OccasionPage> {
   }
 }
 
-List<String> imagename = ['tort', 'aniversay', 'dinner', 'meet', 'other'];
-List<String> texts = ['Birthday', 'Anniversary', 'Dinner', 'Meet up', 'Other'];
+List<String> imagename = [
+  'small',
+  'medium',
+  'large',
+];
+List<String> title = [
+  'Small',
+  'Medium',
+  'Large',
+];
+List<String> subtitle = [
+  '(4-20 guests)',
+  '(20-60 guests)',
+  '(60+ guests)',
+];

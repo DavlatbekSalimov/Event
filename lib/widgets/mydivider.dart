@@ -20,7 +20,7 @@ class Mydivider extends StatelessWidget {
           child: Divider(
             height: 3,
             endIndent: MediaQuery.of(context).size.width * white,
-            color: Colors.indigoAccent,
+            color: const Color.fromARGB(255, 51, 82, 255),
           ),
         )
       ],
