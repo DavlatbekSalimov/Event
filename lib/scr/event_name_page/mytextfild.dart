@@ -6,9 +6,10 @@ class MyTextField extends StatelessWidget {
   final String text;
   final String? hintText;
   final IconData? icon;
-
+  final TextEditingController? controller;
   const MyTextField({
     Key? key,
+    this.controller,
     required this.text,
     this.hintText,
     this.icon,
@@ -32,7 +33,8 @@ class MyTextField extends StatelessWidget {
             ),
           ),
           const Gap(5),
-          TextField(
+          TextFormField(
+            controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: const TextStyle(
@@ -60,6 +62,12 @@ class MyTextField extends StatelessWidget {
                 ),
               ),
             ),
+            validator: (String? value) {
+              if (value == null) {
+                return 'Maydonni to`ldiring';
+              }
+              return null;
+            },
           ),
         ],
       ),

@@ -1,4 +1,4 @@
-import 'package:event/scr/birthdayplan_page/birthdayplan_page.dart';
+import 'package:event/scr/mian_page/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,8 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: MainPage(),
-      home: BirthdayPlanPage(),
+      home: MainPage(),
       theme: ThemeData(
         appBarTheme: AppBarTheme(color: Colors.black),
         colorScheme: const ColorScheme.dark(

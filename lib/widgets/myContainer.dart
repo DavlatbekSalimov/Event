@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 class MyContainer extends StatefulWidget {
   final Widget? child;
   final double? height;
+  final VoidCallback? onTapCallback;
+
   const MyContainer({
-    super.key,
+    Key? key,
     this.child,
     this.height,
-  });
+    this.onTapCallback,
+  }) : super(key: key);
 
   @override
   State<MyContainer> createState() => _MyContainerState();
@@ -22,11 +25,9 @@ class _MyContainerState extends State<MyContainer> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            //border = !border;
-            if (border) {
-              border = false;
-            } else {
-              border = true;
+            border = !border;
+            if (widget.onTapCallback != null) {
+              widget.onTapCallback!();
             }
           });
         },

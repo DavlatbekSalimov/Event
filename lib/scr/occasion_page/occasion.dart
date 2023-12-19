@@ -14,6 +14,9 @@ class OccasionPage extends StatefulWidget {
 }
 
 class _OccasionPageState extends State<OccasionPage> {
+  bool button = false;
+  String selectedOccasion = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +45,18 @@ class _OccasionPageState extends State<OccasionPage> {
               child: GridView.builder(
                 itemCount: 5,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
-                itemBuilder: (BuildContext contex, int index) {
+                  crossAxisCount: 3,
+                ),
+                itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(5),
                     child: MyContainer(
+                      onTapCallback: () {
+                        setState(() {
+                          selectedOccasion = texts.elementAt(index);
+                          button = !button;
+                        });
+                      },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -56,7 +66,7 @@ class _OccasionPageState extends State<OccasionPage> {
                           ),
                           MyText(
                             text: texts.elementAt(index),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -65,16 +75,19 @@ class _OccasionPageState extends State<OccasionPage> {
               ),
             ),
             MyElevatedButton(
+              color: button ? null : const Color.fromARGB(255, 123, 150, 195),
               textt: 'NEXT',
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GuestListPage(),
-                  ),
-                );
+                if (button) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GuestListPage(),
+                    ),
+                  );
+                }
               },
-            )
+            ),
           ],
         ),
       ),

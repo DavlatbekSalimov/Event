@@ -81,26 +81,51 @@ class _BirthdayPlanPageState extends State<BirthdayPlanPage> {
           ),
           const Divider(),
           //! scrollibl
-          const Column(
+          Column(
             children: [
               MyCheckboxListTile(
                 titlee: 'Create an e-invite',
                 subtitle: 'Tap to create an e-invite ',
+                todo: todo,
+                done: done,
+                onChanged: (bool value) {
+                  updateCounts(value);
+                },
               ),
               MyCheckboxListTile(
                 titlee: 'Invite guests',
                 subtitle: 'Tap to invite guests',
+                todo: todo,
+                done: done,
+                onChanged: (bool value) {
+                  updateCounts(value);
+                },
               ),
               MyCheckboxListTile(
                 titlee: 'Hire a decorator',
                 subtitle: 'Tap to view vendors ',
+                todo: todo,
+                done: done,
+                onChanged: (bool value) {
+                  updateCounts(value);
+                },
               ),
               MyCheckboxListTile(
                 titlee: 'Rent Board Games',
                 subtitle: 'Tap to view vendors ',
+                todo: todo,
+                done: done,
+                onChanged: (bool value) {
+                  updateCounts(value);
+                },
               ),
               MyCheckboxListTile(
                 titlee: 'Order food',
+                todo: todo,
+                done: done,
+                onChanged: (bool value) {
+                  updateCounts(value);
+                },
               ),
             ],
           ),
@@ -108,14 +133,35 @@ class _BirthdayPlanPageState extends State<BirthdayPlanPage> {
       ),
     );
   }
+
+  void updateCounts(bool value) {
+    setState(() {
+      if (value) {
+        todo--;
+        done++;
+      } else {
+        todo++;
+        done--;
+      }
+    });
+  }
 }
 
 class MyCheckboxListTile extends StatefulWidget {
   final String? titlee;
   final String? subtitle;
+  final int? todo;
+  final int? done;
+  final void Function(bool) onChanged;
 
-  const MyCheckboxListTile({Key? key, this.titlee, this.subtitle})
-      : super(key: key);
+  const MyCheckboxListTile({
+    Key? key,
+    this.titlee,
+    this.subtitle,
+    this.todo,
+    this.done,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   _MyCheckboxListTileState createState() => _MyCheckboxListTileState();
@@ -147,15 +193,12 @@ class _MyCheckboxListTileState extends State<MyCheckboxListTile> {
         controlAffinity: ListTileControlAffinity.leading,
         activeColor: Colors.white,
         onChanged: (bool? value) {
-          mychecklogic(value);
+          setState(() {
+            ischeckedd = value!;
+          });
+          widget.onChanged(value!);
         },
       ),
     );
-  }
-
-  void mychecklogic(bool? value) {
-    setState(() {
-      ischeckedd = value!;
-    });
   }
 }

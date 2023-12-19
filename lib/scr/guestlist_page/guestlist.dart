@@ -15,6 +15,8 @@ class GuestListPage extends StatefulWidget {
 }
 
 class _GuestListPageState extends State<GuestListPage> {
+  bool button = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +51,11 @@ class _GuestListPageState extends State<GuestListPage> {
                   return Padding(
                     padding: const EdgeInsets.all(5),
                     child: MyContainer(
+                      onTapCallback: () {
+                        setState(() {
+                          button = !button;
+                        });
+                      },
                       height: MediaQuery.of(context).size.height * 0.21,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -74,15 +81,18 @@ class _GuestListPageState extends State<GuestListPage> {
               ),
             ),
             MyElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EventName(),
-                  ),
-                );
-              },
+              color: button ? null : const Color.fromARGB(255, 123, 150, 195),
               textt: 'NEXT',
+              onPressed: () {
+                if (button) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventName(),
+                    ),
+                  );
+                }
+              },
             )
           ],
         ),

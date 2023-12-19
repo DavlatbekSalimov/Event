@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ... (imports and other code)
+// MyTextField widget remains the same
 
 class EventName extends StatefulWidget {
   const EventName({Key? key}) : super(key: key);
@@ -18,6 +19,23 @@ class EventName extends StatefulWidget {
 }
 
 class _EventNameState extends State<EventName> {
+  TextEditingController eventNameController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
+  TextEditingController budgetController = TextEditingController();
+
+  bool isButtonEnabled() {
+    print(eventNameController.text);
+    print(dateController.text);
+    print(timeController.text);
+    print(budgetController.text);
+
+    return eventNameController.text.isNotEmpty &&
+        dateController.text.isNotEmpty &&
+        timeController.text.isNotEmpty &&
+        budgetController.text.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,20 +61,26 @@ class _EventNameState extends State<EventName> {
                   size: 20,
                 ),
               ),
-              const MyTextField(
-                text: 'Event Namee',
+              MyTextField(
+                controller: eventNameController,
+                text: 'Event Name',
+                hintText: 'Enter event name',
+                icon: null,
               ),
-              const MyTextField(
+              MyTextField(
+                controller: dateController,
                 text: 'Date',
                 hintText: 'DD-MM-YYYY',
                 icon: Icons.calendar_month_outlined,
               ),
-              const MyTextField(
+              MyTextField(
+                controller: timeController,
                 text: 'Time',
                 hintText: 'HH:MM',
                 icon: CupertinoIcons.clock,
               ),
-              const MyTextField(
+              MyTextField(
+                controller: budgetController,
                 text: 'Budget',
                 hintText: '00 000',
                 icon: CupertinoIcons.money_rubl,
@@ -69,15 +93,19 @@ class _EventNameState extends State<EventName> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: MyElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const InvitationPage(),
-                ),
-              );
-            },
-            textt: 'NEX',
+            onPressed: isButtonEnabled()
+                ? () {
+                    print('Button Pressed!');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const InvitationPage(),
+                      ),
+                    );
+                  }
+                : null,
+            textt: 'NEXT',
+            color: isButtonEnabled() ? null : Colors.grey,
           ),
         ),
       ),
